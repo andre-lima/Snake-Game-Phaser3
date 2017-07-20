@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "airbnb"
+  ],
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import"
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    "comma-dangle": "off",
+    "no-underscore-dangle": [
+      0
+    ]
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  }
+}
