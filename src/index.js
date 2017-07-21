@@ -1,1 +1,3 @@
-import game from './game/game';
+import Game from './game';
+
+let game = new Game();
