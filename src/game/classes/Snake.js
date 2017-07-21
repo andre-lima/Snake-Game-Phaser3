@@ -20,9 +20,33 @@ let Snake = new Phaser.Class({
     this.direction = direction.RIGHT;
   },
 
-  update: function (time) {
+  update: function (time, cursors) {
     if (time >= this.moveTime) {
       return this.move(time);
+    }
+
+    if (!this.alive) {
+      return;
+    }
+
+    /**
+    * Check which key is pressed, and then change the direction the snake
+    * is heading based on that. The checks ensure you don't double-back
+    * on yourself, for example if you're moving to the right and you press
+    * the LEFT cursor, it ignores it, because the only valid directions you
+    * can move in at that time is up and down.
+    */
+    if (cursors.left.isDown) {
+      this.faceLeft();
+    }
+    else if (cursors.right.isDown) {
+      this.faceRight();
+    }
+    else if (cursors.up.isDown) {
+      this.faceUp();
+    }
+    else if (cursors.down.isDown) {
+      this.faceDown();
     }
   },
 

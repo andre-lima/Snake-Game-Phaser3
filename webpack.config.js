@@ -5,7 +5,8 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    app: './src/index.js',
+    vendor: './src/vendor/phaser.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
