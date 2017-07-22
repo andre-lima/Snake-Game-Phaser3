@@ -1,6 +1,6 @@
 import Snake from '../components/Snake';
 import food from '../assets/food.png';
-import body from '../assets/body.png';
+import body from '../components/Snake/assets/body.png';
 
 export default class extends Phaser.Scene {
   init() { }
@@ -11,14 +11,14 @@ export default class extends Phaser.Scene {
   }
 
   create() {
-    this.snake = new Snake(this, 8, 8);
+    this.snake = new Snake(this, 100, 100);
 
     //  Create our keyboard controls
     this.cursors = this.input.keyboard.createCursorKeys();
   }
 
   update(time, delta) {
-    this.snake.update(time, this.cursors);
+    this.snake.update(delta * 0.001, this.cursors);
   }
 
   render() { }
