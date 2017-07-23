@@ -1,19 +1,21 @@
 import direction from '../../utils/direction';
 import body from './assets/body.png';
+import config from '../../utils/config';
 
-class Snake {
+export default class Snake {
   constructor(scene, x, y) {
     this.headPosition = new Phaser.Geom.Point(x, y);
-    
+    this.distanceIncrement = 0;
+
     this.body = scene.add.group();
 
-    this.head = this.body.create(x , y, 'body');
+    this.head = this.body.create(x, y, 'body');
 
     this.head.setOrigin(0);
 
     this.alive = true;
 
-    this.speed = 250;
+    this.speed = 150;
 
     this.moveTime = 0;
 
@@ -74,6 +76,21 @@ class Snake {
   }
 
   move(delta) {
+
+    // Clamps the snake movement to 16px
+    if (config.clampMovement) {
+      this.distanceIncrement += this.speed * delta;
+
+      if (this.distanceIncrement < config.gridSize) {
+        return true;
+      }
+
+      this.distanceIncrement = config.gridSize;
+
+    } else {
+      this.distanceIncrement = this.speed * delta;
+    }
+
     /**
     * Based on the heading property (which is the direction the pgroup pressed)
     * we update the headPosition value accordingly.
@@ -83,22 +100,23 @@ class Snake {
     */
     switch (this.heading) {
       case direction.LEFT:
-        this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x - (this.speed * delta), 0, 500);
+        this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x - this.distanceIncrement, 0, config.width);
         break;
 
       case direction.RIGHT:
-        this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x + (this.speed * delta), 0, 500);
+        this.headPosition.x = Phaser.Math.Wrap(this.headPosition.x + this.distanceIncrement, 0, config.width);
         break;
 
       case direction.UP:
-        this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y - (this.speed * delta), 0, 500);
+        this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y - this.distanceIncrement, 0, config.height);
         break;
 
       case direction.DOWN:
-        this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y + (this.speed * delta), 0, 500);
+        this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y + this.distanceIncrement, 0, config.height);
         break;
     }
 
+    this.distanceIncrement = 0;
 
     this.direction = this.heading;
 
@@ -109,5 +127,3 @@ class Snake {
   }
 
 }
-
-export default Snake;
