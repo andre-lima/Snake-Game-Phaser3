@@ -13,9 +13,12 @@ export default class Snake {
 
     this.head.setOrigin(0);
 
+    this.tail = new Phaser.Geom.Point(x, y);
+
     this.alive = true;
 
     this.speed = 150;
+    this.maxSpeed = 400;
 
     this.moveTime = 0;
 
@@ -23,8 +26,8 @@ export default class Snake {
     this.direction = direction.RIGHT;
   }
 
-  update(delta, cursors) {
-    this.move(delta);
+  update(delta, cursors, food) {
+    this.move(delta, food);
 
     if (!this.alive) {
       return;
@@ -75,21 +78,15 @@ export default class Snake {
     }
   }
 
-  move(delta) {
-
+  move(delta, food) {
     // Clamps the snake movement to 16px
-    if (config.clampMovement) {
-      this.distanceIncrement += this.speed * delta;
+    this.distanceIncrement += this.speed * delta;
 
-      if (this.distanceIncrement < config.gridSize) {
-        return true;
-      }
-
-      this.distanceIncrement = config.gridSize;
-
-    } else {
-      this.distanceIncrement = this.speed * delta;
+    if (this.distanceIncrement < config.gridSize) {
+      return true;
     }
+
+    this.distanceIncrement = config.gridSize;
 
     /**
     * Based on the heading property (which is the direction the pgroup pressed)
@@ -121,9 +118,34 @@ export default class Snake {
     this.direction = this.heading;
 
     //  Update the body segments
-    this.body.shiftPosition(this.headPosition.x, this.headPosition.y, 1);
+    this.body.shiftPosition(this.headPosition.x, this.headPosition.y, 1, this.tail);
+
+    this.checkCollisionWithFood(food);
 
     return true;
+  }
+
+  grow() {
+    var newBodyPiece = this.body.create(this.tail.x, this.tail.y, 'body');
+    newBodyPiece.setOrigin(0);
+  }
+
+  checkCollisionWithFood(food) {
+    if (this.head.x === food.x && this.head.y === food.y) {
+      this.grow();
+
+      food.wasEaten();
+
+      //  For every 3 items of food eaten we'll increase the snake speed a little
+      if (this.speed < this.maxSpeed && food.total % 3 === 0) {
+        this.speed += 10;
+      }
+
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
 }

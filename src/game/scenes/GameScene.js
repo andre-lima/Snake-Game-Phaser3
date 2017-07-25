@@ -13,16 +13,18 @@ export default class extends Phaser.Scene {
   }
 
   create() {
-    this.snake = new Snake(this, config.gridSize, config.height * 0.5);
-    
-    this.food = new Food(this, config.width - 10 * config.gridSize, config.height * 0.5);
+    const snakeStartingPosition = { x: 0, y: 10 * config.gridSize };
+    const foodStartingPosition = { x: 10 * config.gridSize, y: 10 * config.gridSize };
 
-    //  Create our keyboard controls
+    this.snake = new Snake(this, snakeStartingPosition.x, snakeStartingPosition.y);
+
+    this.food = new Food(this,  foodStartingPosition.x, foodStartingPosition.y);
+
     this.cursors = this.input.keyboard.createCursorKeys();
   }
 
   update(time, delta) {
-    this.snake.update(delta * 0.001, this.cursors);
+    this.snake.update(delta * 0.001, this.cursors, this.food);
   }
 
   render() { }
