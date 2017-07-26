@@ -13,14 +13,25 @@ export default class extends Phaser.Scene {
   }
 
   create() {
-    const snakeStartingPosition = { x: 0, y: 10 * config.gridSize };
-    const foodStartingPosition = { x: 10 * config.gridSize, y: 10 * config.gridSize };
+    const snakeStartingPosition = { x: 0, y: 1 * config.gridSize };
+    const foodStartingPosition = { x: 0 * 3 * config.gridSize, y: 0 * config.gridSize };
 
     this.snake = new Snake(this, snakeStartingPosition.x, snakeStartingPosition.y);
 
-    this.food = new Food(this,  foodStartingPosition.x, foodStartingPosition.y);
+    this.food = new Food(this, foodStartingPosition.x, foodStartingPosition.y);
 
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    // Filling an object with each possible grid position on the game board
+    this.initialValidGridPositions = {};
+    this.currentValidGridPositions = {};
+    for (let i = 0; i < Math.floor(config.height / config.gridSize); ++i) {
+      for (let j = 0; j < Math.floor(config.width / config.gridSize); ++j) {
+        this.initialValidGridPositions[j + i * Math.floor(config.width / config.gridSize)] = [j * config.gridSize, i * config.gridSize];
+      }
+    }
+    
+    this.resetValidGridPositions();
   }
 
   update(time, delta) {
@@ -28,4 +39,9 @@ export default class extends Phaser.Scene {
   }
 
   render() { }
+
+  resetValidGridPositions() {
+    this.currentValidGridPositions = { ...this.initialValidGridPositions };
+  }
+
 }

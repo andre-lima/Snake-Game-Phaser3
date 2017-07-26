@@ -4,6 +4,8 @@ import config from '../../utils/config';
 
 export default class Snake {
   constructor(scene, x, y) {
+    this.scene = scene;
+
     this.headPosition = new Phaser.Geom.Point(x, y);
     this.distanceIncrement = 0;
 
@@ -128,6 +130,12 @@ export default class Snake {
   grow() {
     var newBodyPiece = this.body.create(this.tail.x, this.tail.y, 'body');
     newBodyPiece.setOrigin(0);
+
+    // Removes valid position after iterating the snake body parts position
+    this.body.children.iterate((segment) => {
+      const occupiedGridPosition = (segment.y / config.gridSize) * (config.width / config.gridSize) + (segment.x / config.gridSize);
+      delete this.scene.currentValidGridPositions[occupiedGridPosition];
+    });
   }
 
   checkCollisionWithFood(food) {
