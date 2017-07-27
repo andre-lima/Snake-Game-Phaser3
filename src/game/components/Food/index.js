@@ -20,7 +20,7 @@ export default class Food extends Phaser.GameObjects.Image {
   wasEaten() {
     this.total++;
 
-    const randomPosition = this.randomValidPosition(this.scene.currentValidGridPositions)
+    const randomPosition = this.randomValidPosition(this.scene.currentValidGridPositions);
     this.setPosition(randomPosition[0], randomPosition[1]);
 
     //Reseting valid positions

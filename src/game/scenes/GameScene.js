@@ -1,6 +1,7 @@
 import Snake from '../components/Snake';
 import Food from '../components/Food';
 import food from '../components/Food/assets/food.png';
+import head from '../components/Snake/assets/head.png';
 import body from '../components/Snake/assets/body.png';
 import config from '../utils/config';
 
@@ -9,12 +10,15 @@ export default class extends Phaser.Scene {
 
   preload() {
     this.load.image('food', food);
+    this.load.image('head', head);
     this.load.image('body', body);
   }
 
   create() {
     const snakeStartingPosition = { x: 0, y: 1 * config.gridSize };
     const foodStartingPosition = { x: 0 * 3 * config.gridSize, y: 0 * config.gridSize };
+
+    this.audioCTX = new AudioContext();
 
     this.snake = new Snake(this, snakeStartingPosition.x, snakeStartingPosition.y);
 

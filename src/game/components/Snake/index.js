@@ -1,6 +1,8 @@
 import direction from '../../utils/direction';
-import body from './assets/body.png';
+import './assets/head.png';
+import './assets/body.png';
 import config from '../../utils/config';
+import sfx from '../../utils/audio';
 
 export default class Snake {
   constructor(scene, x, y) {
@@ -11,11 +13,13 @@ export default class Snake {
 
     this.body = scene.add.group();
 
-    this.head = this.body.create(x, y, 'body');
-
+    this.head = this.body.create(x, y, 'head');
     this.head.setOrigin(0);
 
     this.tail = new Phaser.Geom.Point(x, y);
+
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
 
     this.alive = true;
 
@@ -26,14 +30,16 @@ export default class Snake {
 
     this.heading = direction.RIGHT;
     this.direction = direction.RIGHT;
+
+    //this.grow();
   }
 
   update(delta, cursors, food) {
-    this.move(delta, food);
-
     if (!this.alive) {
       return;
     }
+
+    this.move(delta, food);
 
     /**
     * Check which key is pressed, and then change the direction the snake
@@ -122,14 +128,27 @@ export default class Snake {
     //  Update the body segments
     this.body.shiftPosition(this.headPosition.x, this.headPosition.y, 1, this.tail);
 
+    const hitBody = this.body.getFirst({ x: this.head.x, y: this.head.y }, 1);
+
+    if (hitBody) {
+      console.log('dead');
+
+      new Phaser.Sound.Dynamic.FX(this.scene.audioCTX, sfx.death);
+
+      this.alive = false;
+
+      return false;
+    }
+
     this.checkCollisionWithFood(food);
 
     return true;
   }
 
   grow() {
-    var newBodyPiece = this.body.create(this.tail.x, this.tail.y, 'body');
-    newBodyPiece.setOrigin(0);
+    new Phaser.Sound.Dynamic.FX(this.scene.audioCTX, sfx.eat);
+
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
 
     // Removes valid position after iterating the snake body parts position
     this.body.children.iterate((segment) => {
