@@ -1,6 +1,7 @@
 import '../../../vendor/phaser';
 import food from './assets/food.png';
 import config from '../../utils/config';
+import manager from '../../gameManager';
 
 export default class Food extends Phaser.GameObjects.Image {
   constructor(scene, x, y) {
@@ -19,16 +20,12 @@ export default class Food extends Phaser.GameObjects.Image {
 
   wasEaten() {
     this.total++;
+    
+    manager.currentPoints = this.total;
+    manager.totalPoints++;
 
-    const randomPosition = this.randomValidPosition(this.scene.currentValidGridPositions);
-    this.setPosition(randomPosition[0], randomPosition[1]);
-
-    //Reseting valid positions
-    this.scene.resetValidGridPositions();
+    const validPosition = this.scene.getRandomValidGridPosition();
+    this.setPosition(validPosition[0], validPosition[1]);
   }
 
-  randomValidPosition(obj) {
-    var keys = Object.keys(obj)
-    return obj[keys[keys.length * Math.random() << 0]];
-  }
 }

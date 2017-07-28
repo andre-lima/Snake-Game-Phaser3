@@ -1,28 +1,23 @@
 import Snake from '../components/Snake';
 import Food from '../components/Food';
-import food from '../components/Food/assets/food.png';
-import head from '../components/Snake/assets/head.png';
-import body from '../components/Snake/assets/body.png';
+
 import config from '../utils/config';
+import manager from '../gameManager';
 
 export default class extends Phaser.Scene {
-  init() { }
 
   preload() {
-    this.load.image('food', food);
-    this.load.image('head', head);
-    this.load.image('body', body);
+    manager.currentScene = 'game';
   }
 
   create() {
-    const snakeStartingPosition = { x: 0, y: 1 * config.gridSize };
-    const foodStartingPosition = { x: 0 * 3 * config.gridSize, y: 0 * config.gridSize };
-
-    this.audioCTX = new AudioContext();
-
+    const snakeStartingPosition = { x: 0, y: 10 * config.gridSize };
     this.snake = new Snake(this, snakeStartingPosition.x, snakeStartingPosition.y);
 
+    const foodStartingPosition = { x: 30 * config.gridSize, y: 10 * config.gridSize };
     this.food = new Food(this, foodStartingPosition.x, foodStartingPosition.y);
+
+    this.audioCTX = new AudioContext();
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -34,7 +29,7 @@ export default class extends Phaser.Scene {
         this.initialValidGridPositions[j + i * Math.floor(config.width / config.gridSize)] = [j * config.gridSize, i * config.gridSize];
       }
     }
-    
+
     this.resetValidGridPositions();
   }
 
@@ -42,10 +37,28 @@ export default class extends Phaser.Scene {
     this.snake.update(delta * 0.001, this.cursors, this.food);
   }
 
-  render() { }
+  handleSnakeDeath() {
+    manager.numberOfDeaths++;
+
+    // this.scene.start('Death');
+    this.text = this.add.group();
+    this.text.create(config.width * 0.5, config.height * 0.5, 'text').setOrigin(0.5);
+  }
+
+  getRandomValidGridPosition() {
+    const validPosition = this.randomValidPosition(this.currentValidGridPositions);
+    this.resetValidGridPositions();
+
+    return validPosition
+  }
 
   resetValidGridPositions() {
     this.currentValidGridPositions = { ...this.initialValidGridPositions };
+  }
+
+  randomValidPosition(obj) {
+    var keys = Object.keys(obj)
+    return obj[keys[keys.length * Math.random() << 0]];
   }
 
 }

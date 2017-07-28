@@ -2,6 +2,7 @@ import direction from '../../utils/direction';
 import './assets/head.png';
 import './assets/body.png';
 import config from '../../utils/config';
+import manager from '../../gameManager';
 import sfx from '../../utils/audio';
 
 export default class Snake {
@@ -24,14 +25,12 @@ export default class Snake {
     this.alive = true;
 
     this.speed = 150;
-    this.maxSpeed = 400;
+    this.maxSpeed = 450;
 
     this.moveTime = 0;
 
     this.heading = direction.RIGHT;
     this.direction = direction.RIGHT;
-
-    //this.grow();
   }
 
   update(delta, cursors, food) {
@@ -131,11 +130,11 @@ export default class Snake {
     const hitBody = this.body.getFirst({ x: this.head.x, y: this.head.y }, 1);
 
     if (hitBody) {
-      console.log('dead');
-
       new Phaser.Sound.Dynamic.FX(this.scene.audioCTX, sfx.death);
 
       this.alive = false;
+
+      this.scene.handleSnakeDeath();
 
       return false;
     }
