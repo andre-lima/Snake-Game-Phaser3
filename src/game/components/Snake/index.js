@@ -1,3 +1,4 @@
+import Phaser from '../../../vendor/phaser';
 import direction from '../../utils/direction';
 import './assets/head.png';
 import './assets/body.png';
@@ -10,7 +11,6 @@ export default class Snake {
     this.scene = scene;
 
     this.headPosition = new Phaser.Geom.Point(x, y);
-    this.distanceIncrement = 0;
 
     this.body = scene.add.group();
 
@@ -21,12 +21,18 @@ export default class Snake {
 
     this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
     this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
 
     this.alive = true;
 
+    this.distanceIncrement = 0;
     this.speed = 150;
     this.maxSpeed = 450;
-
     this.moveTime = 0;
 
     this.heading = direction.RIGHT;

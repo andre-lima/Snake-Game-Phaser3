@@ -1,3 +1,4 @@
+import Phaser from '../../vendor/phaser';
 import Snake from '../components/Snake';
 import Food from '../components/Food';
 
@@ -40,10 +41,10 @@ export default class extends Phaser.Scene {
   handleSnakeDeath() {
     manager.numberOfDeaths++;
 
-    this.text = this.add.group();
-    this.text.create(config.width * 0.5, config.height * 0.5, 'text').setOrigin(0.5);
+    // this.text = this.add.group();
+    // this.text.create(config.width * 0.5, config.height * 0.5, 'text').setOrigin(0.5);
     
-    //this.scene.start('Death');
+    this.scene.start('Death');
   }
 
   getRandomValidGridPosition() {

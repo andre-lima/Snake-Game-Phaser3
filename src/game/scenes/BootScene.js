@@ -1,3 +1,4 @@
+import Phaser from '../../vendor/phaser';
 import food from '../components/Food/assets/food.png';
 import head from '../components/Snake/assets/head.png';
 import body from '../components/Snake/assets/body.png';
