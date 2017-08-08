@@ -15,10 +15,10 @@ export default class extends Phaser.Scene {
     const snakeStartingPosition = { x: 0, y: 10 * config.gridSize };
     this.snake = new Snake(this, snakeStartingPosition.x, snakeStartingPosition.y);
 
-    const foodStartingPosition = { x: 30 * config.gridSize, y: 10 * config.gridSize };
+    const foodStartingPosition = { x: 20 * config.gridSize, y: 10 * config.gridSize };
     this.food = new Food(this, foodStartingPosition.x, foodStartingPosition.y);
 
-    this.audioCTX = new AudioContext();
+    this.audioCTX = this.audioCTX || new AudioContext();
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -40,9 +40,6 @@ export default class extends Phaser.Scene {
 
   handleSnakeDeath() {
     manager.numberOfDeaths++;
-
-    // this.text = this.add.group();
-    // this.text.create(config.width * 0.5, config.height * 0.5, 'text').setOrigin(0.5);
     
     this.scene.start('Death');
   }
