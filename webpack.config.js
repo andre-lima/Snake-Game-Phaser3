@@ -20,7 +20,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(scss|sass)$/,
+        test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           loader: [
             { loader: 'css-loader', options: { minimize: true, sourceMap: true } },
