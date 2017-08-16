@@ -21,12 +21,6 @@ export default class Snake {
 
     this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
     this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
-    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
-    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
-    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
-    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
-    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
-    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
 
     this.alive = true;
 
@@ -37,6 +31,22 @@ export default class Snake {
 
     this.heading = direction.RIGHT;
     this.direction = direction.RIGHT;
+
+    this.createExternalControllers();
+  }
+
+  createExternalControllers() {
+    // Directional buttons
+    const btn_up = document.getElementById('btn-up');
+    const btn_down = document.getElementById('btn-down');
+    const btn_left = document.getElementById('btn-left');
+    const btn_right = document.getElementById('btn-right');
+
+    // Directional buttons actions
+    btn_up.addEventListener('click', this.faceUp.bind(this));
+    btn_down.addEventListener('click', this.faceDown.bind(this));
+    btn_left.addEventListener('click', this.faceLeft.bind(this));
+    btn_right.addEventListener('click', this.faceRight.bind(this));
   }
 
   update(delta, cursors, food) {
