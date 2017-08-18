@@ -1,20 +1,32 @@
+$break-phone_small: 320px;
+$break-phone: 640px;
+
 .game {
   margin: 0 auto;
 
   &__area{
+    @media screen and (max-width: $break-phone_small) {
+      zoom: 50%;
+    }
+    @media screen and (max-width: $break-phone) {
+      zoom: 70%;
+    }
     width: 480px;
     height: 608px;
     margin: 0 auto;
   }
 
   &__controls{
+    position: absolute;
+    bottom: 10px;
+    left: calc(50% - 120px);
     margin: 0 auto;
-    width: 300px;
+    width: 240px;
     display: flex;
     align-items: center;
 
     .column {
-      width: 100px;
+      width:80px;
     }
   }
 }
@@ -23,8 +35,8 @@
   position: relative;
   margin: 20px 5px;
   background: $color-button;
-  width: 90px;
-  height: 90px;
+  width: 70px;
+  height: 70px;
   box-shadow: 5px 5px 0 0 black;
 
   &:active {
