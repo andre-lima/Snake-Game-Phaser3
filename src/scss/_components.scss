@@ -1,16 +1,29 @@
 $break-phone_small: 320px;
 $break-phone: 640px;
 
-.game {
-  margin: 0 auto;
-
-  &__area{
+.fake-phone-screen {
+  zoom: 100%;
     @media screen and (max-width: $break-phone_small) {
       zoom: 50%;
     }
     @media screen and (max-width: $break-phone) {
       zoom: 70%;
     }
+}
+
+.game {
+  margin: 0 auto;
+
+  &__stats {
+    font-family: $font-stats;
+    width: 480px;
+    margin: 0 auto;
+    padding: 2px;
+    background: $color-stats;
+    color: $color-text-stats;
+  }
+
+  &__area {
     width: 480px;
     height: 608px;
     margin: 0 auto;

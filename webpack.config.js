@@ -41,6 +41,17 @@ module.exports = {
           'file-loader'
         ]
       },
+      { 
+        test: /\.(ttf)$/, 
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 100000
+            }
+          }
+        ]
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
