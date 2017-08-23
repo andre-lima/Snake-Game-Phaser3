@@ -8,7 +8,7 @@ import manager from '../gameManager';
 export default class extends Phaser.Scene {
 
   preload() {
-    manager.currentScene = 'game';
+
   }
 
   create() {
@@ -39,8 +39,6 @@ export default class extends Phaser.Scene {
   }
 
   handleSnakeDeath() {
-    manager.numberOfDeaths++;
-    
     this.scene.start('Death');
   }
 

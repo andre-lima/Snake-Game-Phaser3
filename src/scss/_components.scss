@@ -18,9 +18,20 @@ $break-phone: 640px;
     font-family: $font-stats;
     width: 480px;
     margin: 0 auto;
-    padding: 2px;
     background: $color-stats;
     color: $color-text-stats;
+
+    &_points {
+      display: inline-block;
+      width: 48%;
+      margin: 2px;
+
+      &:last-child {
+        text-align: right;
+      }
+
+    }
+
   }
 
   &__area {

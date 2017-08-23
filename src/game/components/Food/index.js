@@ -21,8 +21,9 @@ export default class Food extends Phaser.GameObjects.Image {
   wasEaten() {
     this.total++;
     
-    manager.currentPoints = this.total;
-    manager.totalPoints++;
+    // manager.currentPoints = this.total;
+    // manager.totalPoints++;
+    manager.increaseCurrentScore(1);
 
     const validPosition = this.scene.getRandomValidGridPosition();
     this.setPosition(validPosition[0], validPosition[1]);

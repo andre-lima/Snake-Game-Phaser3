@@ -13,8 +13,6 @@ export default class extends Phaser.Scene {
     this.load.image('head', head);
     this.load.image('body', body);
     this.load.image('text', text);
-
-    manager.currentScene = 'boot';
   }
 
   update() { 
