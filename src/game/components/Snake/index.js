@@ -21,6 +21,10 @@ export default class Snake {
 
     this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
     this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
 
     this.alive = true;
 

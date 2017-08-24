@@ -1,6 +1,10 @@
 $break-phone_small: 320px;
 $break-phone: 640px;
 
+body {
+  background: $game-bkg;
+}
+
 .fake-phone-screen {
   zoom: 100%;
     @media screen and (max-width: $break-phone_small) {
