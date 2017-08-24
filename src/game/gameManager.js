@@ -1,7 +1,7 @@
 const manager = (function() {
   let currentScore = 0;
   let highScore = 0;
-  let numberOfDeaths = 0;
+  let deathCount = 0;
   let currentScoreElement = document.getElementById('current-score');
   let highScoreElement = document.getElementById('high-score');
 
@@ -23,9 +23,19 @@ const manager = (function() {
     currentScoreElement.innerHTML = currentScore;
   }
 
+  function increaseDeathCount () {
+    deathCount++;
+  }
+
+  function getDeathCount () {
+    return deathCount;
+  }
+
   return {
     increaseCurrentScore,
-    restartPoints
+    restartPoints,
+    increaseDeathCount,
+    getDeathCount
   }
 
 })();
