@@ -1,7 +1,7 @@
 import Phaser from '../../vendor/phaser';
-import food from '../components/Food/assets/food.png';
-import head from '../components/Snake/assets/head.png';
-import body from '../components/Snake/assets/body.png';
+import food from '../components/Food/assets/food.gif';
+import head from '../components/Snake/assets/head.gif';
+import body from '../components/Snake/assets/body.gif';
 
 import manager from '../gameManager';
 

@@ -6,6 +6,7 @@ body {
 }
 
 .fake-phone-screen {
+  margin-top: 15px;
   zoom: 100%;
     @media screen and (max-width: $break-phone_small) {
       zoom: 50%;
@@ -46,7 +47,7 @@ body {
 
   &__controls{
     position: absolute;
-    bottom: 10px;
+    bottom: -5px;
     left: calc(50% - 120px);
     margin: 0 auto;
     width: 240px;
@@ -83,8 +84,8 @@ body {
   &__letters {
     font-size: 12pt;
     position: absolute;
-    bottom: 18%;
-    right: 10%;
+    bottom: 13%;
+    right: 4%;
     font-family: Courier, monospace;
   }
 

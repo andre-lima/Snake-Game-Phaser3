@@ -4,8 +4,8 @@ const config = {
   height: 608,
   gridSize: 16,
   backgroundColor: '#777e6c',
-  textColor: '#262529',
   parent: 'root',
+  pixelColor: '#262529'
 };
 
 export default config;

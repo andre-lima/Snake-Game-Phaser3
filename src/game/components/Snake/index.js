@@ -1,7 +1,7 @@
 import Phaser from '../../../vendor/phaser';
 import direction from '../../utils/direction';
-import './assets/head.png';
-import './assets/body.png';
+import './assets/head.gif';
+import './assets/body.gif';
 import config from '../../utils/config';
 import manager from '../../gameManager';
 import sfx from '../../utils/audio';

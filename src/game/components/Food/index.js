@@ -1,5 +1,5 @@
 import '../../../vendor/phaser';
-import food from './assets/food.png';
+import food from './assets/food.gif';
 import config from '../../utils/config';
 import manager from '../../gameManager';
 
@@ -21,8 +21,6 @@ export default class Food extends Phaser.GameObjects.Image {
   wasEaten() {
     this.total++;
     
-    // manager.currentPoints = this.total;
-    // manager.totalPoints++;
     manager.increaseCurrentScore(1);
 
     const validPosition = this.scene.getRandomValidGridPosition();
