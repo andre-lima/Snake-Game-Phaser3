@@ -9,7 +9,7 @@ body {
   margin-top: 15px;
   zoom: 100%;
     @media screen and (max-width: $break-phone_small) {
-      zoom: 50%;
+      zoom: 40%;
     }
     @media screen and (max-width: $break-phone) {
       zoom: 70%;
@@ -34,9 +34,7 @@ body {
       &:last-child {
         text-align: right;
       }
-
     }
-
   }
 
   &__area {
@@ -50,12 +48,12 @@ body {
     bottom: -5px;
     left: calc(50% - 120px);
     margin: 0 auto;
-    width: 240px;
+    width: 300px;
     display: flex;
     align-items: center;
 
     .column {
-      width:80px;
+      width:110px;
     }
   }
 }
@@ -63,12 +61,14 @@ body {
 .directional-button {
   position: relative;
   display: flex;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
-  margin: 20px 5px;
+  margin: 20px 0px;
   background: $color-button;
-  width: 70px;
+  width: 100px;
   height: 70px;
+  border-radius: 50%;
   box-shadow: 5px 5px 0 0 black;
 
   &:active {
@@ -77,15 +77,22 @@ body {
     box-shadow: 2px 2px 0 0 black;
   }
 
+  &--left {
+    transform: rotate(5deg);
+    top: -5px;
+  }
+
+  &--right {
+    transform: rotate(-5deg);
+    top: -5px;
+  }
+
   &__number {
     font-size: 20pt;
   }
 
   &__letters {
-    font-size: 12pt;
-    position: absolute;
-    bottom: 13%;
-    right: 4%;
+    font-size: 10pt;
     font-family: Courier, monospace;
   }
 
