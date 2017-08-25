@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Phaser 3 Snake Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="favicon.ico"><link href="style.min.css" rel="stylesheet"></head>
+
+<body>
+  <!--[if lte IE 9]>
+  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<![endif]-->
+  <div class="fake-phone-screen">
+    <div class="game__stats">
+      <p class="game__stats_points">HI-SCORE: <span id='high-score'>0</span></p>
+      <p class="game__stats_points"><span id='current-score'>0</span> points</p>
+    </div>
+    <div class='game__area' id='root'></div>
+  </div>
+
+  <div class='game__controls'>
+    <div id='btn-left' class="column directional-button directional-button--left">
+      <p class='directional-button__number'>4</p>
+      <p class='directional-button__letters'>lft</p>
+    </div>
+    <div class='column column__middle'>
+      <div id='btn-up' class="directional-button directional-button--up">
+        <p class='directional-button__number'>2</p>
+        <p class='directional-button__letters'>up#</p>
+      </div>
+      <div id='btn-down' class="directional-button directional-button--down">
+        <p class='directional-button__number'>8</p>
+        <p class='directional-button__letters'>dwn</p>
+      </div>
+    </div>
+    <div id='btn-right' class="column directional-button directional-button--right">
+      <p class='directional-button__number'>6</p>
+      <p class='directional-button__letters'>rgt</p>
+    </div>
+  </div>
+
+<script type="text/javascript" src="app.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script></body>
+
+</html>
