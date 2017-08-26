@@ -46,11 +46,17 @@ export default class Snake {
     const btn_left = document.getElementById('btn-left');
     const btn_right = document.getElementById('btn-right');
 
-    // Directional buttons actions
-    btn_up.addEventListener('click', this.faceUp.bind(this));
-    btn_down.addEventListener('click', this.faceDown.bind(this));
-    btn_left.addEventListener('click', this.faceLeft.bind(this));
-    btn_right.addEventListener('click', this.faceRight.bind(this));
+    // Directional buttons actions - Tap
+    btn_up.addEventListener('touchstart', this.faceUp.bind(this), false);
+    btn_down.addEventListener('touchstart', this.faceDown.bind(this), false);
+    btn_left.addEventListener('touchstart', this.faceLeft.bind(this), false);
+    btn_right.addEventListener('touchstart', this.faceRight.bind(this), false);
+
+    // Directional buttons actions - Click
+    btn_up.addEventListener('click', this.faceUp.bind(this), false);
+    btn_down.addEventListener('click', this.faceDown.bind(this), false);
+    btn_left.addEventListener('click', this.faceLeft.bind(this), false);
+    btn_right.addEventListener('click', this.faceRight.bind(this), false);
   }
 
   update(delta, cursors, food) {
