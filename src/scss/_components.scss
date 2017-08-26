@@ -3,6 +3,13 @@ $break-phone: 640px;
 $game-width: 400px;
 $game-height: 480px;
 
+* {
+  -webkit-user-select: none;  /* Chrome 49+ */
+  -moz-user-select: none;     /* Firefox 43+ */
+  -ms-user-select: none;      /* No support yet */
+  user-select: none;          /* Likely future */  
+}
+
 body {
   padding-top: 25px;
   position: relative;
@@ -114,17 +121,9 @@ body {
 
   &__number {
     font-size: 20pt;
-    -webkit-user-select: none;  /* Chrome 49+ */
-    -moz-user-select: none;     /* Firefox 43+ */
-    -ms-user-select: none;      /* No support yet */
-    user-select: none;          /* Likely future */  
   }
 
   &__letters {
-    -webkit-user-select: none;  /* Chrome 49+ */
-    -moz-user-select: none;     /* Firefox 43+ */
-    -ms-user-select: none;      /* No support yet */
-    user-select: none;          /* Likely future */  
     font-size: 10pt;
     font-family: Courier, monospace;
   }
