@@ -1,7 +1,10 @@
+import osType from '../utils/osType';
+
 const controllerManager = (function () {
 
   function bindController(dataValue, callback) {
-    document.querySelector('[data-direction="' + dataValue + '"]').addEventListener('click', callback, false);
+    const eventType = osType.getType() === 'mobile' ? 'touchstart' : 'mousedown';
+    document.querySelector('[data-direction="' + dataValue + '"]').addEventListener(eventType, callback, false);
   }
 
   return {
