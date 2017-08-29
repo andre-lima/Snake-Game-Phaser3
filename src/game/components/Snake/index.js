@@ -37,10 +37,10 @@ export default class Snake {
 
     this.cursors = this.scene.input.keyboard.createCursorKeys();
 
-    controllerManager.bindController('up', this.faceUp.bind(this));
-    controllerManager.bindController('down', this.faceDown.bind(this));
-    controllerManager.bindController('left', this.faceLeft.bind(this));
-    controllerManager.bindController('right', this.faceRight.bind(this));
+    controllerManager.linkActionToDomElement('direction', 'up', this.faceUp.bind(this));
+    controllerManager.linkActionToDomElement('direction', 'down', this.faceDown.bind(this));
+    controllerManager.linkActionToDomElement('direction', 'left', this.faceLeft.bind(this));
+    controllerManager.linkActionToDomElement('direction', 'right', this.faceRight.bind(this));
   }
 
   update(delta, food) {
