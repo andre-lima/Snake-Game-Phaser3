@@ -1,10 +1,13 @@
 const statsManager = (function() {
   let currentScore = 0;
+
   let highScore = localStorage.getItem('high_score') || 0;
-  document.getElementById('high-score').innerHTML = highScore;
-  let deathCount = localStorage.getItem('death_count') || 0;
-  const currentScoreElement = document.getElementById('current-score');
   const highScoreElement = document.getElementById('high-score');
+  highScoreElement.innerHTML = highScore;
+
+  let deathCount = localStorage.getItem('death_count') || 0;
+
+  const currentScoreElement = document.getElementById('current-score');
 
   function increaseCurrentScore (points) {
     currentScore += points;
@@ -22,7 +25,7 @@ const statsManager = (function() {
 
   function restartPoints () {
     currentScore = 0;
-    currentScoreElement.innerHTML = currentScore;
+    currentScoreElement.innerHTML = 0;
   }
 
   function increaseDeathCount () {
