@@ -1,9 +1,9 @@
-const manager = (function() {
+const statsManager = (function() {
   let currentScore = 0;
   let highScore = 0;
   let deathCount = 0;
-  let currentScoreElement = document.getElementById('current-score');
-  let highScoreElement = document.getElementById('high-score');
+  const currentScoreElement = document.getElementById('current-score');
+  const highScoreElement = document.getElementById('high-score');
 
   function increaseCurrentScore (points) {
     currentScore += points;
@@ -40,4 +40,4 @@ const manager = (function() {
 
 })();
 
-export default manager;
+export default statsManager;

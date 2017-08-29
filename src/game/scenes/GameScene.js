@@ -3,7 +3,6 @@ import Snake from '../components/Snake';
 import Food from '../components/Food';
 
 import config from '../utils/config';
-import manager from '../gameManager';
 
 export default class extends Phaser.Scene {
 
@@ -20,8 +19,6 @@ export default class extends Phaser.Scene {
 
     this.audioCTX = this.audioCTX || new AudioContext();
 
-    this.cursors = this.input.keyboard.createCursorKeys();
-
     // Filling an object with each possible grid position on the game board
     this.initialValidGridPositions = {};
     this.currentValidGridPositions = {};
@@ -35,7 +32,7 @@ export default class extends Phaser.Scene {
   }
 
   update(time, delta) {
-    this.snake.update(delta * 0.001, this.cursors, this.food);
+    this.snake.update(delta * 0.001, this.food);
   }
 
   handleSnakeDeath() {

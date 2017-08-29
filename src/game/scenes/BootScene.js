@@ -3,8 +3,6 @@ import food from '../components/Food/assets/food.gif';
 import head from '../components/Snake/assets/head.gif';
 import body from '../components/Snake/assets/body.gif';
 
-import manager from '../gameManager';
-
 export default class extends Phaser.Scene {
 
   preload() {

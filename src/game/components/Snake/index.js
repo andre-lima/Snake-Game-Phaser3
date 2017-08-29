@@ -3,11 +3,13 @@ import direction from '../../utils/direction';
 import './assets/head.gif';
 import './assets/body.gif';
 import config from '../../utils/config';
-import manager from '../../gameManager';
 import sfx from '../../utils/audio';
+import controllerManager from '../../managers/controllerManager';
 
 export default class Snake {
   constructor(scene, x, y) {
+    this.SPEED_INCREASE = 10;
+
     this.scene = scene;
 
     this.headPosition = new Phaser.Geom.Point(x, y);
@@ -22,9 +24,6 @@ export default class Snake {
     this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
     this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
     this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
-    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
-    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
-    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
 
     this.alive = true;
 
@@ -36,30 +35,15 @@ export default class Snake {
     this.heading = direction.RIGHT;
     this.direction = direction.RIGHT;
 
-    this.createExternalControllers();
+    this.cursors = this.scene.input.keyboard.createCursorKeys();
+
+    controllerManager.bindController('up', this.faceUp.bind(this));
+    controllerManager.bindController('down', this.faceDown.bind(this));
+    controllerManager.bindController('left', this.faceLeft.bind(this));
+    controllerManager.bindController('right', this.faceRight.bind(this));
   }
 
-  createExternalControllers() {
-    // Directional buttons
-    const btn_up = document.getElementById('btn-up');
-    const btn_down = document.getElementById('btn-down');
-    const btn_left = document.getElementById('btn-left');
-    const btn_right = document.getElementById('btn-right');
-
-    // Directional buttons actions - Tap
-    btn_up.addEventListener('touchstart', this.faceUp.bind(this), false);
-    btn_down.addEventListener('touchstart', this.faceDown.bind(this), false);
-    btn_left.addEventListener('touchstart', this.faceLeft.bind(this), false);
-    btn_right.addEventListener('touchstart', this.faceRight.bind(this), false);
-
-    // Directional buttons actions - Click
-    btn_up.addEventListener('click', this.faceUp.bind(this), false);
-    btn_down.addEventListener('click', this.faceDown.bind(this), false);
-    btn_left.addEventListener('click', this.faceLeft.bind(this), false);
-    btn_right.addEventListener('click', this.faceRight.bind(this), false);
-  }
-
-  update(delta, cursors, food) {
+  update(delta, food) {
     if (!this.alive) {
       return;
     }
@@ -73,16 +57,16 @@ export default class Snake {
     * the LEFT cursor, it ignores it, because the only valid directions you
     * can move in at that time is up and down.
     */
-    if (cursors.left.isDown) {
+    if (this.cursors.left.isDown) {
       this.faceLeft();
     }
-    else if (cursors.right.isDown) {
+    else if (this.cursors.right.isDown) {
       this.faceRight();
     }
-    else if (cursors.up.isDown) {
+    else if (this.cursors.up.isDown) {
       this.faceUp();
     }
-    else if (cursors.down.isDown) {
+    else if (this.cursors.down.isDown) {
       this.faceDown();
     }
   }
@@ -144,6 +128,9 @@ export default class Snake {
       case direction.DOWN:
         this.headPosition.y = Phaser.Math.Wrap(this.headPosition.y + this.distanceIncrement, 0, config.height);
         break;
+
+      default:
+        break;
     }
 
     this.distanceIncrement = 0;
@@ -174,6 +161,7 @@ export default class Snake {
     new Phaser.Sound.Dynamic.FX(this.scene.audioCTX, sfx.eat);
 
     this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
+    this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
 
     // Removes valid position after iterating the snake body parts position
     this.body.children.iterate((segment) => {
@@ -190,7 +178,7 @@ export default class Snake {
 
       //  For every 3 items of food eaten we'll increase the snake speed a little
       if (this.speed < this.maxSpeed && food.total % 3 === 0) {
-        this.speed += 10;
+        this.speed += this.SPEED_INCREASE;
       }
 
       return true;
