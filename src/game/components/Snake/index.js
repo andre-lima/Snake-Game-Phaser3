@@ -162,12 +162,6 @@ export default class Snake {
 
     this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
     this.body.create(this.tail.x, this.tail.y, 'body').setOrigin(0);
-
-    // Removes valid position after iterating the snake body parts position
-    this.body.children.iterate((segment) => {
-      const occupiedGridPosition = (segment.y / config.gridSize) * (config.width / config.gridSize) + (segment.x / config.gridSize);
-      delete this.scene.currentValidGridPositions[occupiedGridPosition];
-    });
   }
 
   checkCollisionWithFood(food) {
